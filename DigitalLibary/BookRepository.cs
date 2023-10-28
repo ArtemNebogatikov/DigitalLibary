@@ -1,4 +1,5 @@
-﻿using static System.Reflection.Metadata.BlobBuilder;
+﻿using System.Numerics;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace DigitalLibary
 {
@@ -190,5 +191,41 @@ namespace DigitalLibary
             return isBook;
         }
 
+        public Book GetBookLastRealease()
+        {
+            Book book = null;
+            using (var db = new AppContext())
+            {
+                book = db.Book.OrderByDescending(b => b.YearOfIssue).FirstOrDefault();
+            }
+            return book;
+        }
+
+        public List<Book> GetAllBookByAsc()
+        {
+            List<Book> books = null;
+            using (var db = new AppContext())
+            {
+                books = db.Book.OrderBy(b => b.Title).ToList();
+                foreach (var book in books)
+                {
+                    Console.WriteLine(book.Title);
+                }
+            }
+            return books;
+        }
+        public List<Book> GetAllBookByYearDesc()
+        {
+            List<Book> books;
+            using(var db = new AppContext())
+            {
+                books = db.Book.OrderByDescending(b => b.YearOfIssue).ToList();
+                foreach(var book in books)
+                {
+                    Console.WriteLine(book.Title + " " + book.YearOfIssue);
+                }
+            }
+            return books;
+        }
     }
 }

@@ -29,6 +29,10 @@
             };
             Console.WriteLine("Количество книг Джоан Роулинг: {0}", bookRepository.GetCountBooksFromAuthor("джоан роулинг"));
             Console.WriteLine("Количество книг у пользователя B на руках: {0}", userRepository.GetCountBooksFromUser("b"));
+            var lastBook = bookRepository.GetBookLastRealease();
+            Console.WriteLine(lastBook.Title + lastBook.Genre + lastBook.YearOfIssue);
+            bookRepository.GetAllBookByAsc();
+            bookRepository.GetAllBookByYearDesc();
             Console.ReadLine();
         }
     }

@@ -102,8 +102,7 @@ namespace DigitalLibary
                 {
                     using (var db = new AppContext())
                     {
-                        countBooks = db.User.Include(x => x.Books).Where(u => u.Name.ToLower() == name.ToLower()).Count();
-
+                        countBooks = db.User.Include(x => x.Books).Where(u => u.Name.ToLower() == name.ToLower()).FirstOrDefault().Books.Count;
                     }
                 }
                 else
